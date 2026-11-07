@@ -1,27 +1,72 @@
 # flatpak-Prism_Launcher-discord-RPC-fix
 
-PT-BR: Solução leve em C para corrigir o status do Discord no Prism Launcher (Flatpak) via monitoramento nativo da árvore de processos host (prismrun -> java). 
+**PT-BR:** Solução leve em C para corrigir o status do Discord no Prism Launcher (Flatpak) via monitoramento nativo da árvore de processos host (prismrun -> java).
 
-EN-US: Lightweight C solution to fix Discord status for Prism Launcher (Flatpak) by native monitoring of the host process tree (prismrun -> java).
+**EN-US:** Lightweight C solution to fix Discord status for Prism Launcher (Flatpak) by native monitoring of the host process tree (prismrun -> java).
+
+---
+
+## Downloads & Desenvolvimento / Downloads & Development
+
+### PT-BR: Downloads e Modificações
+Se você não deseja compilar o código fonte manualmente, pode baixar o binário pronto:
+* [Baixar o prism_rpc-fix (Última Versão)](https://github.com)
+
+Se você é um desenvolvedor, quer entender o código ou prefere compilar manualmente por segurança, acesse nossa pasta de desenvolvimento com o código-fonte e instruções:
+* [Pasta de Desenvolvimento e Código-Fonte](./source/)
+
+---
+
+### EN-US: Downloads and Modifications
+If you do not want to compile the source code manually, you can download the pre-compiled binary:
+* [Download prism_rpc-fix (Latest Version)](https://github.com)
+
+If you are a developer, want to inspect the code, or prefer to compile manually for security reasons, check out our development folder with source code and instructions:
+* [Development Folder and Source Code](./source/)
+
+---
 
 ## Instruções de Instalação e Uso / Installation and Setup Instructions
 
-### PT-BR:
+### Passo 1: Configurar Permissão do Flatpak / Step 1: Configure Flatpak Permissions
 
-### Passo 1: Configurar Permissão do Flatpak
-O Prism Launcher roda isolado em um container. Para permitir que ele execute o fix no seu sistema real, abra o terminal e rode o comando:
+**PT-BR:** O Prism Launcher roda isolado em um container. Para permitir que ele execute o fix no seu sistema real, abra o terminal e rode o comando:
 ```bash
 sudo flatpak override org.prismlauncher.PrismLauncher --talk-name=org.freedesktop.Flatpak
 ```
 
-### Passo 2: Baixar ou Compilar o Binário
-Você pode compilar o arquivo `main.c` por conta própria ou baixar o executável pronto fornecido neste repositório. O arquivo final deve ser colocado obrigatoriamente no caminho abaixo:
+**EN-US:** Prism Launcher runs inside an isolated container. To allow it to trigger the fix on your host system, open your terminal and run:
+```bash
+sudo flatpak override org.prismlauncher.PrismLauncher --talk-name=org.freedesktop.Flatpak
+```
+
+---
+
+### Passo 2: Alocar o Binário / Step 2: Place the Binary
+
+**PT-BR:** O arquivo executável `prism_rpc-fix` (baixado das Releases ou compilado manualmente) deve ser colocado obrigatoriamente no caminho abaixo:
 ```text
 ~/.local/bin/prism_rpc-fix
 ```
-*Certifique-se de dar permissão de execução ao arquivo executável rodando `chmod +x ~/.local/bin/prism_rpc-fix` no seu terminal.*
+Certifique-se de dar permissão de execução ao arquivo executável rodando o comando abaixo no seu terminal:
+```bash
+chmod +x ~/.local/bin/prism_rpc-fix
+```
 
-### Passo 3: Configurar o Prism Launcher
+**EN-US:** The executable file `prism_rpc-fix` (downloaded from Releases or compiled manually) must be placed exactly at the following path:
+```text
+~/.local/bin/prism_rpc-fix
+```
+Make sure to grant execution permissions to the executable file by running the following command in your terminal:
+```bash
+chmod +x ~/.local/bin/prism_rpc-fix
+```
+
+---
+
+### Passo 3: Configurar o Prism Launcher / Step 3: Configure Prism Launcher
+
+**PT-BR:**
 1. Abra o Prism Launcher.
 2. Na barra superior, clique em **Configurações**.
 3. Na barra lateral esquerda, clique em **Minecraft**.
@@ -32,34 +77,11 @@ Você pode compilar o arquivo `main.c` por conta própria ou baixar o executáve
    ```
 6. Clique em **OK** para salvar.
 
-**ATENÇÃO: FECHE COMPLETAMENTE O PRISM LAUNCHER E ABRA-O NOVAMENTE AGORA.** Se você não reiniciar o aplicativo neste momento, as novas permissões do Flatpak não serão carregadas e o jogo não vai iniciar.
-
-### Passo 4: Vincular no Discord
-1. Inicie qualquer instância do Minecraft pelo Prism Launcher.
-2. Abra o seu aplicativo do Discord nativo (.deb).
-3. Vá em **Configurações de Usuário** -> **Atividades Registradas** (Jogos Registrados).
-4. Você provavelmente verá a mensagem dizendo que nenhum jogo foi detectado. Clique no link azul **Adicione-o!**.
-5. Na lista suspensa, selecione o processo chamado **prism_rpc-fix**.
-6. Clique na caixa de texto do nome e mude para **Minecraft: Java Edition** (respeitando maiúsculas e minúsculas para que o Discord puxe a capa oficial do jogo automaticamente).
+**ATENÇÃO: FECHE COMPLETAMENTE O PRISM LAUNCHER E ABRA-O NOVAMENTE AGORA.** Se você não reiniciar o aplicativo neste momento, as novas permissões do Flatpak não serão carregadas e o fix falhará ao iniciar o jogo.
 
 ---
 
-### EN-US:
-
-### Step 1: Configure Flatpak Permissions
-Prism Launcher runs inside an isolated container. To allow it to trigger the fix on your host system, open your terminal and run:
-```bash
-sudo flatpak override org.prismlauncher.PrismLauncher --talk-name=org.freedesktop.Flatpak
-```
-
-### Step 2: Download or Compile the Binary
-You can either compile `main.c` yourself or download the pre-compiled executable provided in this repository. The final file must be placed exactly at:
-```text
-~/.local/bin/prism_rpc-fix
-```
-*Make sure to grant execution permissions to the file by running `chmod +x ~/.local/bin/prism_rpc-fix` in your terminal.*
-
-### Step 3: Configure Prism Launcher
+**EN-US:**
 1. Open Prism Launcher.
 2. In the top bar, click **Settings**.
 3. In the left sidebar, click **Minecraft**.
@@ -70,9 +92,23 @@ You can either compile `main.c` yourself or download the pre-compiled executable
    ```
 6. Click **OK** to save.
 
-**ATTENTION: CLOSE PRISM LAUNCHER COMPLETELY AND REOPEN IT NOW.** If you do not restart the application at this step, the new Flatpak permissions will not load, and the game will fail to launch.
+**ATTENTION: CLOSE PRISM LAUNCHER COMPLETELY AND REOPEN IT NOW.** If you do not restart the application at this step, the new Flatpak permissions will not load, and the fix will fail to launch alongside the game.
 
-### Step 4: Register on Discord
+---
+
+### Passo 4: Vincular no Discord / Step 4: Register on Discord
+
+**PT-BR:**
+1. Inicie qualquer instância do Minecraft pelo Prism Launcher.
+2. Abra o seu aplicativo do Discord nativo (.deb).
+3. Vá em **Configurações de Usuário** -> **Atividades Registradas** (Jogos Registrados).
+4. Você provavelmente verá a mensagem dizendo que nenhum jogo foi detectado. Clique no link azul **Adicione-o!**.
+5. Na lista suspensa, selecione o processo chamado **prism_rpc-fix**.
+6. Clique na caixa de texto do nome e mude para **Minecraft: Java Edition** (respeitando maiúsculas e minúsculas para que o Discord puxe a capa oficial do jogo automaticamente).
+
+---
+
+**EN-US:**
 1. Launch any Minecraft instance via Prism Launcher.
 2. Open your native Discord client (.deb).
 3. Go to **User Settings** -> **Registered Games**.
@@ -93,6 +129,8 @@ Este fix de Rich Presence (RPC) foi construído do zero em C puro para resolver 
 3. Entra em um loop leve que inspeciona o diretório `/proc` a cada 5 segundos combinando `pgrep`, `xargs` e `pstree`.
 4. Ele valida se o processo `java` ativo é um descendente direto do gerenciador de instâncias do Flatpak, o `prismrun`.
 5. Enquanto essa relação de parentesco (`prismrun` -> `java`) for verdadeira, o programa continua rodando sob o nome único e estático `prism_rpc-fix`. Assim que o jogo é fechado, a relação na árvore de processos é desfeita, o loop quebra e o programa encerra a si mesmo imediatamente, limpando o sistema sem deixar processos fantasmas.
+
+---
 
 ### EN-US: Technical Mechanism and the Problem It Solves
 Prism Launcher in Flatpak runs isolated inside a sandbox (`bwrap`). When launching Minecraft, the actual `java` executable and its arguments are locked inside this hidden container. Common scripts fail because they cannot read these parameters from outside the Flatpak environment. Every time you switched instances, the window ID changed slightly, causing Discord to lose track of the game and treat it as a generic Java process.
