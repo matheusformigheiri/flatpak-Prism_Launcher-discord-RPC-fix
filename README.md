@@ -4,8 +4,9 @@ PT-BR: Solução leve em C para corrigir o status do Discord no Prism Launcher (
 
 EN-US: Lightweight C solution to fix Discord status for Prism Launcher (Flatpak) by native monitoring of the host process tree (prismrun -> java).
 
+## Instruções de Instalação e Uso / Installation and Setup Instructions
 
-## PT-BR: Instruções de Instalação e Uso
+### PT-BR:
 
 ### Passo 1: Configurar Permissão do Flatpak
 O Prism Launcher roda isolado em um container. Para permitir que ele execute o fix no seu sistema real, abra o terminal e rode o comando:
@@ -43,7 +44,7 @@ Você pode compilar o arquivo `main.c` por conta própria ou baixar o executáve
 
 ---
 
-## EN-US: Installation and Setup Instructions
+### EN-US:
 
 ### Step 1: Configure Flatpak Permissions
 Prism Launcher runs inside an isolated container. To allow it to trigger the fix on your host system, open your terminal and run:
