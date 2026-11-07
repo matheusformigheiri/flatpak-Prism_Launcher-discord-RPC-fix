@@ -141,3 +141,56 @@ This Rich Presence (RPC) fix was built from scratch in pure C to solve this with
 3. It enters a lightweight loop inspecting the `/proc` directory every 5 seconds combining `pgrep`, `xargs`, and `pstree`.
 4. It verifies whether the active `java` process is a direct descendant of the Flatpak instance manager, `prismrun`.
 5. As long as this parent-child relationship (`prismrun` -> `java`) remains true, the program runs under the fixed, static name `prism_rpc-fix`. As soon as the game is closed, the process tree link breaks, the loop terminates, and the program exits immediately, keeping the system clean without leaving ghost processes behind.
+
+
+## Perguntas Frequentes & Solução de Problemas / FAQ & Troubleshooting
+
+### PT-BR
+
+Esta seção aborda problemas comuns de indexação, permissões do Flatpak e detecção de status do Discord ao usar o Prism Launcher.
+
+#### O Discord não detecta o processo prism_rpc-fix na lista de jogos.
+* **Causa provável:** O Prism Launcher não foi totalmente reiniciado após o comando de permissão, ou o arquivo executável está na pasta errada.
+* **Solução:** 
+  1. Certifique-se de que fechou o launcher completamente (não apenas minimizou na bandeja do sistema).
+  2. Verifique se o arquivo está exatamente em `~/.local/bin/prism_rpc-fix` e se você executou o comando `chmod +x` nele.
+  3. Abra um terminal fora do Flatpak e digite `prism_rpc-fix`. Se o sistema disser "comando não encontrado", a sua pasta `.local/bin` não está adicionada ao seu `$PATH` do sistema.
+
+#### Minha atividade no Discord some ou pisca quando mudo de versão do Minecraft.
+* **Causa provável:** O comando personalizado foi configurado dentro do perfil de uma única instância.
+* **Solução:** Remova o comando das configurações da instância e cole-o nas configurações **Globais** do Prism Launcher (Configurações -> Minecraft -> Comandos personalizados) para abranger o ecossistema inteiro.
+
+#### Erro flatpak-spawn: command not found ou falha ao iniciar o jogo.
+* **Causa provável:** Você pode estar tentando rodar o Prism Launcher instalado via repositório nativo (.deb, .rpm, AUR) em vez da versão Flatpak oficial do Flathub.
+* **Solução:** Este watchdog foi desenhado especificamente para o ecossistema de sandbox do Flatpak. Se você usa o Prism Launcher nativo, o comando `flatpak-spawn --host` falhará porque o launcher já está rodando diretamente no host.
+
+---
+
+### EN-US
+
+This section targets common indexing issues, Flatpak permission blocks, and Discord status detection bugs when playing Minecraft via Prism Launcher.
+
+#### Discord won't detect the prism_rpc-fix process in the Registered Games list.
+* **Likely Cause:** Prism Launcher was not fully restarted after applying the override permission, or the binary is missing/misplaced.
+* **Solution:**
+  1. Make sure to completely close the launcher (don't just minimize it to the system tray).
+  2. Double-check that the file is located precisely at `~/.local/bin/prism_rpc-fix` and that you ran `chmod +x` on it.
+  3. Open a system terminal (outside Flatpak) and run `prism_rpc-fix`. If you get a "command not found" error, your user `.local/bin` directory is not part of your system's `$PATH`.
+
+#### Discord status disappears or loses reference when switching Minecraft versions.
+* **Likely Cause:** The custom command was applied into a single local instance profile.
+* **Solution:** Verify that the pre-launch custom command is added to the **Global Settings** of Prism Launcher (Settings -> Minecraft -> Custom Commands), rather than a specific profile.
+
+#### Error flatpak-spawn: command not found or launch failure.
+* **Likely Cause:** You are likely using a native system package (.deb, .rpm, Arch AUR) of Prism Launcher instead of the official Flathub Flatpak package.
+* **Solution:** This watchdog script relies entirely on Flatpak's sandbox escape mechanics. If your launcher runs natively on the host, `flatpak-spawn` is not required and will return an error.
+
+---
+
+### Tabela de Erros Rápidos / Quick Error Reference
+
+| Sintoma / Symptom | Causa Raiz / Root Cause | Correção / Fix |
+| :--- | :--- | :--- |
+| **Discord "Playing Java"** | Discord tracked raw `java` process | Remova Java das atividades e adicione o `prism_rpc-fix` / Remove Java from games and add `prism_rpc-fix` |
+| **Game won't launch** | Sandbox permission blocked | Execute o `sudo flatpak override` e reinicie o launcher / Run `sudo flatpak override` and restart launcher |
+| **Ghost processes left behind** | Host process tree sync lag | O script checa a árvore a cada 5s; aguarde ou force `pkill -f prism_rpc-fix` / Checks process tree every 5s; wait or run `pkill -f prism_rpc-fix` |
