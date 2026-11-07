@@ -10,7 +10,7 @@
 
 ### PT-BR: Downloads e Modificações
 Se você não deseja compilar o código fonte manualmente, pode baixar o binário pronto:
-* [Baixar o prism_rpc-fix (Última Versão)](https://github.com)
+* [Baixar o prism_rpc-fix v1.0.0 (Última Versão)](https://github.com/matheusformigheiri/flatpak-Prism_Launcher-discord-RPC-fix/releases/tag/1.0.0)
 
 Se você é um desenvolvedor, quer entender o código ou prefere compilar manualmente por segurança, acesse nossa pasta de desenvolvimento com o código-fonte e instruções:
 * [Pasta de Desenvolvimento e Código-Fonte](./source/)
@@ -19,7 +19,7 @@ Se você é um desenvolvedor, quer entender o código ou prefere compilar manual
 
 ### EN-US: Downloads and Modifications
 If you do not want to compile the source code manually, you can download the pre-compiled binary:
-* [Download prism_rpc-fix (Latest Version)](https://github.com)
+* [Download prism_rpc-fix v1.0.0 (Latest Version)](https://github.com/matheusformigheiri/flatpak-Prism_Launcher-discord-RPC-fix/releases/tag/1.0.0)
 
 If you are a developer, want to inspect the code, or prefer to compile manually for security reasons, check out our development folder with source code and instructions:
 * [Development Folder and Source Code](./source/)
